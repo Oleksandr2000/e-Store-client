@@ -1,0 +1,46 @@
+@import '../varaibles';
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(2, 1fr);
+  row-gap: 30px;
+  &__img {
+    margin: 0 auto;
+    width: 80%;
+    cursor: pointer;
+  }
+}
+
+.search-panel {
+  width: 500px;
+  margin: 100px auto;
+}
+
+.slider-hit {
+  margin: 50px 0;
+
+  h2 {
+    margin-bottom: 20px;
+    text-align: center;
+  }
+  &__wrapper {
+    position: relative;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: 1, 1fr;
+  }
+  &__next {
+    position: absolute;
+    right: -50px;
+    top: 50%;
+    transform: translate(0, -50%);
+    cursor: pointer;
+  }
+  &__loader {
+    height: 5px;
+    border-radius: 10px;
+    background-color: $blue;
+    transition: 0.7s all;
+  }
+}

@@ -1,0 +1,42 @@
+@import '../varaibles';
+
+.device {
+  margin-top: 50px;
+  min-height: 70vh;
+  &__wrapper {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+  }
+  &__card {
+    border-top: none;
+    border-left: none;
+    border-bottom: 3px solid $main-border-color;
+    border-radius: 10px;
+    background: #fff;
+  }
+}
+
+.filter {
+  &__checkbox {
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 10px;
+  }
+  &__item {
+    padding-bottom: 20px;
+    border-bottom: 2px solid $main-border-color;
+    &-last {
+      border: none;
+    }
+  }
+  &__title {
+    width: 100%;
+    margin-left: 15px;
+    font-size: 16px;
+    line-height: 30px;
+    color: #333;
+  }
+}

@@ -1,0 +1,50 @@
+@import '../varaibles';
+.button {
+  width: auto;
+}
+
+.button__buy {
+  width: 250px;
+  height: 45px;
+  border: 3px solid $blue;
+  border-radius: 5px;
+  color: $blue;
+  background: #fff;
+  font-size: 15px;
+  font-weight: 600;
+  &:hover {
+    color: #fff;
+    background: $blue;
+  }
+}
+
+.button__filter {
+  border: 1px solid $blue;
+  height: 35px;
+  border-radius: 5px;
+  color: #333;
+  background-color: #fff;
+}
+
+.checkbox {
+  height: 30px;
+  width: 30px;
+  border: 2px solid #999;
+  border-radius: 5px;
+  background-color: #fff;
+  line-height: 20px;
+  font-size: 20px;
+  text-align: center;
+  color: #fff;
+  &-active {
+    height: 30px;
+    width: 30px;
+    border: 2px solid #999;
+    border-radius: 5px;
+    background-color: #fff;
+    color: #333;
+    font-size: 20px;
+    line-height: 20px;
+    text-align: center;
+  }
+}

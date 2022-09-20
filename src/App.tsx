@@ -1,25 +1,43 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { Routes, Route } from 'react-router-dom';
+import { authRoutes, publicRoutes } from './routes';
+import Header from './components/Header';
+import './sass/app.scss';
+import { useAppDispatch } from './hooks';
+import Container from 'react-bootstrap/Container';
+import { fetchBrands } from './redux/slice/BrandSlice';
+import { fetchType } from './redux/slice/TypeSlice';
+
+import { fetchAuth } from './redux/slice/UserSlice';
+import Footer from './components/Footer';
 
 function App() {
+  const isAuth = true;
+  const dispatch = useAppDispatch();
+
+  React.useEffect(() => {
+    dispatch(fetchType());
+    dispatch(fetchBrands());
+
+    dispatch(fetchAuth());
+  }, []);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <Header />
+      <Container>
+        <Routes>
+          {isAuth &&
+            authRoutes.map((route: any, i: number) => (
+              <Route path={route.path} element={<route.element />} key={i} />
+            ))}
+          {publicRoutes.map((route: any, i: number) => (
+            <Route path={route.path} element={<route.element />} key={i} />
+          ))}
+        </Routes>
+      </Container>
+      <Footer />
+    </>
   );
 }
 

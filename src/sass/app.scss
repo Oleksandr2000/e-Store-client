@@ -1,0 +1,51 @@
+@import './components/index';
+@import './varaibles';
+
+.container {
+  width: 1300px;
+  margin: 0 auto;
+}
+
+body {
+  background-color: rgba(250, 250, 250);
+}
+
+.loader {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 100px;
+}
+
+.sale {
+  position: absolute;
+  padding: 2px 0;
+  top: 0;
+  right: 0;
+  width: 120px;
+  border: 3px solid $sale;
+  background: $sale;
+  border-top-right-radius: 5px;
+  box-shadow: none;
+  text-align: center;
+  font-size: 18px;
+  font-weight: 500;
+}
+
+.hit {
+  position: absolute;
+  padding: 2px 0;
+  top: 0;
+  left: 0;
+  width: 70px;
+  border: 3px solid $gold;
+  border-top-left-radius: 5px;
+  box-shadow: none;
+  text-align: center;
+  font-size: 18px;
+  font-weight: 500;
+  &:hover {
+    background: $gold;
+    transition: 0.5s all;
+  }
+}
