@@ -6,7 +6,7 @@ interface LoaderProps {
 
 const Loader: React.FC<LoaderProps> = ({ styles }) => {
   return (
-    <div className={styles}>
+    <div className={`mt-5 ${styles}`}>
       <img src="/Main-spinner.svg" alt="loading..." />
     </div>
   );

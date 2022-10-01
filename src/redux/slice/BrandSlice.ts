@@ -1,16 +1,16 @@
-import { createSlice, createAsyncThunk, PayloadAction } from '@reduxjs/toolkit';
+import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import axios from '../../axios';
-
-export type Brand = {
-  id: number;
-  name: string;
-};
+import { Brand } from '../../types';
 
 export const createBrand = createAsyncThunk<void, { name: string }>(
   'brand/createBrand',
   async (params, { rejectWithValue }) => {
-    const { data } = await axios.post('/brand', params);
-    return data;
+    try {
+      const { data } = await axios.post('/brand', params);
+      return data;
+    } catch (error: any) {
+      return rejectWithValue(error.message);
+    }
   },
 );
 
@@ -47,6 +47,9 @@ const brandSlice = createSlice({
     setOneBrand: (state, action: any) => {
       state.activeBrands[0] = action.payload;
     },
+    clearStatusBrand: (state) => {
+      state.statusPOST = null;
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -72,6 +75,6 @@ const brandSlice = createSlice({
   },
 });
 
-export const { setActiveBrand, setOneBrand } = brandSlice.actions;
+export const { setActiveBrand, setOneBrand, clearStatusBrand } = brandSlice.actions;
 
 export default brandSlice.reducer;

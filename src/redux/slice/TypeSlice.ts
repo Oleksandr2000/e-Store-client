@@ -1,16 +1,16 @@
-import { createSlice, createAsyncThunk, PayloadAction } from '@reduxjs/toolkit';
+import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import axios from '../../axios';
-
-export type Type = {
-  id: number;
-  name: string;
-};
+import { Type } from '../../types';
 
 export const createType = createAsyncThunk<void, { name: string }>(
   'brand/createType',
-  async (params) => {
-    const { data } = await axios.post('/type', params);
-    return data;
+  async (params, { rejectWithValue }) => {
+    try {
+      const { data } = await axios.post('/type', params);
+      return data;
+    } catch (error: any) {
+      return rejectWithValue(error.message);
+    }
   },
 );
 
@@ -47,6 +47,9 @@ const typeSlice = createSlice({
     setOneType: (state, action: any) => {
       state.activeType[0] = action.payload;
     },
+    clearStatusType: (state) => {
+      state.statusPOST = null;
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -72,6 +75,6 @@ const typeSlice = createSlice({
   },
 });
 
-export const { setActiveType, setOneType } = typeSlice.actions;
+export const { setActiveType, setOneType, clearStatusType } = typeSlice.actions;
 
 export default typeSlice.reducer;

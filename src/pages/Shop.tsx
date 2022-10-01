@@ -29,8 +29,6 @@ const Shop = () => {
   const isLoadingTypes = useAppSelector((store) => store.types.status) === 'loading';
   const isLoadingItems = useAppSelector((store) => store.device.status) === 'loading';
 
-  console.log('device', items);
-
   React.useEffect(() => {
     dispatch(fetchAllDevice({ filterBrand: '', filterType: '', limit, page: 1 }));
   }, []);
@@ -82,8 +80,8 @@ const Shop = () => {
       </Row>
       <Row className="mb-5">
         <Pagination>
-          {arrPage.map((item) => (
-            <Pagination.Item active={page === item} onClick={() => setPage(item)}>
+          {arrPage.map((item, i) => (
+            <Pagination.Item active={page === item} onClick={() => setPage(item)} key={i}>
               {item}
             </Pagination.Item>
           ))}

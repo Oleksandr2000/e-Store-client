@@ -41,12 +41,16 @@ const CartItem: React.FC<CartItemProps> = ({
           {brands
             .filter((brand) => brand.id === brandId)
             .map((brand) => (
-              <button className="button p-1 m-1 button__filter">{brand.name}</button>
+              <button className="button p-1 m-1 button__filter" key={brand.id}>
+                {brand.name}
+              </button>
             ))}
           {types
             .filter((type) => type.id === typeId)
             .map((type) => (
-              <button className="button p-1 m-1 button__filter">{type.name}</button>
+              <button className="button p-1 m-1 button__filter" key={type.id}>
+                {type.name}
+              </button>
             ))}
         </Card.Text>
         <Link to={`${DEVICE_ROUTE}/${id}`}>

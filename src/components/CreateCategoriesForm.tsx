@@ -28,36 +28,38 @@ const CreateCategoriesForm: React.FC<DeviceFormpRrops> = ({ name }) => {
     onSubmit: (values) => {
       if (name.toLowerCase() === 'brand') {
         dispatch(createBrand(values));
+        CreateCategories.resetForm();
       }
       if (name.toLowerCase() === 'type') {
         dispatch(createType(values));
-      } else {
-        console.log(values);
+        CreateCategories.resetForm();
       }
     },
   });
 
   return (
-    <Card style={{ width: 600 }} className="mt-5">
-      <h2 className="m-auto mt-2">Create {name}</h2>
-      <Form className="m-4" onSubmit={CreateCategories.handleSubmit}>
-        <Form.Group className="mb-3" />
-        <Form.Label htmlFor="name">{name}</Form.Label>
-        <Form.Control
-          type="text"
-          name="name"
-          placeholder={`Enter name`}
-          value={CreateCategories.values.name}
-          onChange={CreateCategories.handleChange}
-          onBlur={CreateCategories.handleBlur}
-        />
-        <Row className="d-flex justify-content-between">
-          <Button variant="primary" type="submit" className="mt-4 m-auto" style={{ width: 200 }}>
-            Enter
-          </Button>
-        </Row>
-      </Form>
-    </Card>
+    <>
+      <Card style={{ width: 600 }} className="mt-5">
+        <h2 className="m-auto mt-2">Create {name}</h2>
+        <Form className="m-4" onSubmit={CreateCategories.handleSubmit}>
+          <Form.Group className="mb-3" />
+          <Form.Label htmlFor="name">{name}</Form.Label>
+          <Form.Control
+            type="text"
+            name="name"
+            placeholder={`Enter name`}
+            value={CreateCategories.values.name}
+            onChange={CreateCategories.handleChange}
+            onBlur={CreateCategories.handleBlur}
+          />
+          <Row className="d-flex justify-content-between">
+            <Button variant="primary" type="submit" className="mt-4 m-auto" style={{ width: 200 }}>
+              Enter
+            </Button>
+          </Row>
+        </Form>
+      </Card>
+    </>
   );
 };
 

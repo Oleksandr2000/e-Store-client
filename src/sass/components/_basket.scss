@@ -1,0 +1,91 @@
+@import '../varaibles';
+
+.basket {
+  margin-top: 30px;
+  h1 {
+    padding-left: 30px;
+  }
+  &__wrapper {
+    margin-top: 20px;
+    min-height: 500px;
+    border-radius: 10px;
+    border: 1px solid $main-border-color;
+    padding: 20px 30px;
+  }
+  &__footer {
+    margin-top: 30px;
+    padding: 15px 30px;
+    display: flex;
+    justify-content: space-between;
+    font-size: 24px;
+    font-weight: 500;
+  }
+  &__info {
+    width: 300px;
+    display: flex;
+    justify-content: space-between;
+  }
+}
+
+.basket-item {
+  height: 100px;
+  margin-top: 20px;
+  padding: 0 25px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #fff;
+  border-bottom: 3px solid $main-border-color;
+  border-right: 1px solid $main-border-color;
+  border-radius: 5px;
+  img {
+    width: 60px;
+    height: 60px;
+  }
+  &__name {
+    font-size: 24px;
+    font-weight: 500;
+  }
+  &__price {
+    font-size: 24px;
+    font-weight: 500;
+  }
+  &__count {
+    display: flex;
+    flex-direction: row;
+    span {
+      display: block;
+      margin: 0 15px;
+      font-size: 24px;
+      font-weight: 700;
+    }
+    .decrement {
+      text-align: center;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 40px;
+      height: 40px;
+      border-radius: 100%;
+      border: 1px solid $gold;
+      color: $gold;
+      cursor: pointer;
+    }
+    .increment {
+      text-align: center;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 40px;
+      height: 40px;
+      border-radius: 100%;
+      border: 1px solid $gold;
+      color: $gold;
+      cursor: pointer;
+    }
+  }
+}
+
+.gold {
+  color: $gold;
+}

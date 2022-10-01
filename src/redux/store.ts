@@ -1,4 +1,5 @@
 import { configureStore } from '@reduxjs/toolkit';
+import BasketSlice from './slice/BasketSlice';
 import BrandSlice from './slice/BrandSlice';
 import DeviceSlice from './slice/DeviceSlice';
 import TypeSlice from './slice/TypeSlice';
@@ -10,6 +11,7 @@ export const store = configureStore({
     device: DeviceSlice,
     brands: BrandSlice,
     types: TypeSlice,
+    basket: BasketSlice,
   },
 });
 

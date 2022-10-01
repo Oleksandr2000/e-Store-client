@@ -1,7 +1,7 @@
 import React from 'react';
 import Slider from '../components/Slider';
 import { useAppDispatch, useAppSelector } from '../hooks';
-import { fetchAllDevice, fetchAllHit, fetchAllSale } from '../redux/slice/DeviceSlice';
+import { fetchAllHit, fetchAllSale } from '../redux/slice/DeviceSlice';
 import Loader from '../components/Loader';
 import Grid from '../components/Grid';
 import SearchPanel from '../components/SearchPanel';

@@ -2,15 +2,17 @@ import React from 'react';
 import { Card, Row } from 'react-bootstrap';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, Navigate, useLocation } from 'react-router-dom';
 import { fetchLogin, fetchRegister } from '../redux/slice/UserSlice';
-import { LOGIN_ROUTE, REGISTER_ROUTE } from '../utils/constant';
+import { LOGIN_ROUTE, REGISTER_ROUTE, SHOP_ROUTE } from '../utils/constant';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import { useAppDispatch, useAppSelector } from '../hooks';
+import Loader from '../components/Loader';
 
 const Login = () => {
   const { pathname } = useLocation();
+  const { status, data } = useAppSelector((store) => store.user);
   const isLogin = pathname === '/login';
 
   const dispatch = useAppDispatch();
@@ -33,6 +35,18 @@ const Login = () => {
       isLogin ? dispatch(fetchLogin(values)) : dispatch(fetchRegister(values));
     },
   });
+
+  if (status === 'loading') {
+    return <Loader styles={'loader'} />;
+  }
+
+  if (status === 'loaded' && data.token) {
+    return <Navigate to={SHOP_ROUTE} />;
+  }
+
+  if (status === 'error' && data.token) {
+    alert('An error occurred');
+  }
 
   return (
     <div className="auth">

@@ -9,13 +9,19 @@ import {
   REGISTER_ROUTE,
   SHOP_ROUTE,
   ABOUT_ROUTE,
+  BASKET_ROUTE,
 } from '../utils/constant';
 import { logout } from '../redux/slice/UserSlice';
 import { Container } from 'react-bootstrap';
+import { calcTotalCount } from '../services';
 
 const Header = () => {
-  const isAuth = useAppSelector((store) => store.user.data);
+  const isAuth = useAppSelector((store) => store.user.data.token);
+  const { basket, guestBasket } = useAppSelector((store) => store.basket);
   const dispatch = useAppDispatch();
+
+  const totalBasketCount = calcTotalCount(basket.items);
+  const totalGuestCount = calcTotalCount(guestBasket);
 
   return (
     <div className="header">
@@ -31,6 +37,12 @@ const Header = () => {
             <Link to={SHOP_ROUTE}>
               <Button variant="primary">All products</Button>
             </Link>
+            <Link to={BASKET_ROUTE}>
+              <Button variant="warning">
+                Basket {' | '}
+                {totalBasketCount}
+              </Button>
+            </Link>
             <Link to={ADMIN_ROUTE}>
               <Button variant="warning">Admin</Button>
             </Link>
@@ -45,6 +57,12 @@ const Header = () => {
           <div className="header__nav">
             <Link to={SHOP_ROUTE}>
               <Button variant="primary">All products</Button>
+            </Link>
+            <Link to={BASKET_ROUTE}>
+              <Button variant="warning">
+                Basket {' | '}
+                {totalGuestCount}
+              </Button>
             </Link>
             <Link to={ABOUT_ROUTE}>
               <Button variant="primary">About</Button>

@@ -1,0 +1,21 @@
+@import '../varaibles';
+
+.review {
+  border: 1px solid $main-border-color;
+  border-radius: 5px;
+  padding: 15px 20px;
+  margin-top: 30px;
+
+  &__info {
+    margin-bottom: 25px;
+  }
+
+  &__data {
+    font-size: 16px;
+  }
+
+  &__text {
+    font-size: 20px;
+    font-weight: 400;
+  }
+}

@@ -1,5 +1,6 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import axios from '../../axios';
+import { Device } from '../../types';
 
 export const createDevice = createAsyncThunk<void, any>('device/createDevice', async (params) => {
   const { data } = await axios.post('/device', params);
@@ -35,20 +36,6 @@ export const fetchAllHit = createAsyncThunk<Device[]>('device/fetchAllHit', asyn
   const { data } = await axios.get('/hit');
   return data;
 });
-
-export type Device = {
-  rating: number;
-  id: number;
-  name: string;
-  price: number;
-  brandId: number;
-  typeId: number;
-  img: string;
-  sale: boolean;
-  hit: boolean;
-  discount: number;
-  info?: { id: number; title: string; description: string }[];
-};
 
 export type DeviceRes = {
   count: number;
@@ -98,6 +85,9 @@ const deviceSlice = createSlice({
   reducers: {
     setActivePage: (state, action) => {
       state.page = action.payload;
+    },
+    clearStatusPost: (state) => {
+      state.statusPOST = null;
     },
   },
   extraReducers: (builder) => {
@@ -154,6 +144,6 @@ const deviceSlice = createSlice({
   },
 });
 
-export const { setActivePage } = deviceSlice.actions;
+export const { setActivePage, clearStatusPost } = deviceSlice.actions;
 
 export default deviceSlice.reducer;

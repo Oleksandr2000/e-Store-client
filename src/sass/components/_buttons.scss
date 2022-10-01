@@ -3,6 +3,34 @@
   width: auto;
 }
 
+.confirm {
+  width: 250px;
+  height: 45px;
+  border: 3px solid $gold;
+  border-radius: 5px;
+  background: #fff;
+  font-weight: 500;
+  &:hover {
+    background: $gold;
+    transition: 0.3s all;
+  }
+}
+
+.delete {
+  width: 150px;
+  height: 40px;
+  border: 1px solid $sale;
+  border-radius: 5px;
+  background: #fff;
+  font-weight: 500;
+  text-align: center;
+  line-height: 35px;
+  &:hover {
+    background: $sale;
+    transition: 0.3s all;
+  }
+}
+
 .button__buy {
   width: 250px;
   height: 45px;

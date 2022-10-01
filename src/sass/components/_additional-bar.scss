@@ -1,0 +1,23 @@
+@import '../varaibles';
+
+.additional-bar {
+  margin-top: 50px;
+  padding: 10px 20px 30px 20px;
+  border-bottom: 2px solid $main-border-color;
+  border-radius: 10px;
+  background: #fff;
+  min-height: 200px;
+  &__nav {
+    display: flex;
+  }
+  &__link {
+    padding: 0 15px;
+    color: #333;
+    font-size: 22px;
+    font-weight: 500;
+    cursor: pointer;
+    &_active {
+      border-bottom: 3px solid $blue;
+    }
+  }
+}

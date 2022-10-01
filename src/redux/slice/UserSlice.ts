@@ -1,17 +1,29 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import jwtDecode from 'jwt-decode';
 import axios from '../../axios';
+import { UserData } from '../../types';
 
-type UserData = {
-  email: string;
-  password: string;
+type userResponce = {
+  token: string | null;
+  user: {
+    email: string;
+    id: number;
+    role: string;
+  };
 };
 
-export const fetchLogin = createAsyncThunk<string, UserData>('user/fetchLogin', async (params) => {
-  const { data } = await axios.post('/login', params);
-  localStorage.setItem('token', data.token);
+export const postReviews = createAsyncThunk<void, any>('reviews/postReviews', async (params) => {
+  const { data } = await axios.post('/review', params);
   return data;
 });
+
+export const fetchLogin = createAsyncThunk<userResponce, UserData>(
+  'user/fetchLogin',
+  async (params) => {
+    const { data } = await axios.post('/login', params);
+    localStorage.setItem('token', data.token);
+    return data;
+  },
+);
 
 export const fetchRegister = createAsyncThunk<string, UserData>(
   'user/fetchRegister',
@@ -22,7 +34,7 @@ export const fetchRegister = createAsyncThunk<string, UserData>(
   },
 );
 
-export const fetchAuth = createAsyncThunk<string>('user/fetchAuth', async () => {
+export const fetchAuth = createAsyncThunk<userResponce>('user/fetchAuth', async () => {
   const { data } = await axios.get('/auth');
 
   localStorage.setItem('token', data.token);
@@ -30,12 +42,19 @@ export const fetchAuth = createAsyncThunk<string>('user/fetchAuth', async () => 
 });
 
 interface UserState {
-  data: string | null;
+  data: userResponce;
   status: string;
 }
 
 const initialState: UserState = {
-  data: null,
+  data: {
+    token: null,
+    user: {
+      id: 0,
+      email: '',
+      role: '',
+    },
+  },
   status: 'loading',
 };
 
@@ -44,7 +63,7 @@ const userSlice = createSlice({
   initialState,
   reducers: {
     logout: (state) => {
-      state.data = null;
+      state.data.token = null;
       localStorage.removeItem('token');
     },
   },
@@ -52,7 +71,7 @@ const userSlice = createSlice({
     builder
       .addCase(fetchLogin.pending, (state) => {
         state.status = 'loading';
-        state.data = null;
+        state.data.token = null;
       })
       .addCase(fetchLogin.fulfilled, (state, action) => {
         state.status = 'loaded';
@@ -60,37 +79,46 @@ const userSlice = createSlice({
       })
       .addCase(fetchLogin.rejected, (state) => {
         state.status = 'error';
-        state.data = null;
+        state.data.token = null;
       })
       .addCase(fetchRegister.pending, (state) => {
         state.status = 'loading';
-        state.data = null;
+        state.data.token = null;
       })
       .addCase(fetchRegister.fulfilled, (state, action) => {
         state.status = 'loaded';
-        state.data = action.payload;
+        state.data.token = action.payload;
       })
       .addCase(fetchRegister.rejected, (state) => {
         state.status = 'error';
-        state.data = null;
+        state.data.token = null;
       })
       .addCase(fetchAuth.pending, (state) => {
         state.status = 'loading';
-        state.data = null;
       })
       .addCase(fetchAuth.fulfilled, (state, action) => {
         state.status = 'loaded';
-        state.data = action.payload;
+        state.data.token = action.payload.token;
+        state.data.user = action.payload.user;
       })
       .addCase(fetchAuth.rejected, (state) => {
         state.status = 'error';
-        state.data = null;
+        state.data.token = null;
+      })
+      .addCase(postReviews.pending, (state) => {
+        state.status = 'loading';
+      })
+      .addCase(postReviews.fulfilled, (state) => {
+        state.status = 'loaded';
+      })
+      .addCase(postReviews.rejected, (state) => {
+        state.status = 'error';
       });
   },
 });
 
 export const { logout } = userSlice.actions;
 
-export const selectIsAuth = (state: UserState) => Boolean(state.data);
+export const selectIsAuth = (state: UserState) => Boolean(state.data.token);
 
 export default userSlice.reducer;

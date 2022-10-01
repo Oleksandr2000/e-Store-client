@@ -10,6 +10,18 @@ body {
   background-color: rgba(250, 250, 250);
 }
 
+.post {
+  .modal-content {
+    background: none;
+    border: none;
+  }
+  &-loader {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+}
+
 .loader {
   display: flex;
   justify-content: center;

@@ -5,7 +5,8 @@ import Form from 'react-bootstrap/Form';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import { useAppDispatch, useAppSelector } from '../hooks';
-import { createDevice } from '../redux/slice/DeviceSlice';
+import { clearStatusPost, createDevice } from '../redux/slice/DeviceSlice';
+import Loader from './Loader';
 
 interface DeviceFormpRrops {}
 
@@ -17,6 +18,7 @@ const DeviceForm: React.FC<DeviceFormpRrops> = () => {
   };
 
   const dispatch = useAppDispatch();
+  const { statusPOST } = useAppSelector((store) => store.device);
   const { brands } = useAppSelector((store) => store.brands);
   const { types } = useAppSelector((store) => store.types);
   const [info, setInfo] = React.useState<Info[]>([]);
@@ -69,6 +71,9 @@ const DeviceForm: React.FC<DeviceFormpRrops> = () => {
       formData.append('info', JSON.stringify(info));
 
       dispatch(createDevice(formData));
+      setTimeout(() => {
+        dispatch(clearStatusPost());
+      }, 2000);
       console.log(values);
     },
   });
@@ -76,6 +81,20 @@ const DeviceForm: React.FC<DeviceFormpRrops> = () => {
   const selectFile = (e: any) => {
     createForm.setFieldValue('img', e.target.files[0]);
   };
+
+  if (statusPOST === 'loading') {
+    return <Loader styles={'loader'} />;
+  }
+
+  if (statusPOST === 'loaded') {
+    return (
+      <div
+        className="d-flex justify-content-center align-items-center mt-5"
+        style={{ width: 600, height: 600 }}>
+        <div>Загрузка прошла успешно !!!</div>
+      </div>
+    );
+  }
 
   return (
     <Card style={{ width: 600 }} className="mt-5">
@@ -115,7 +134,9 @@ const DeviceForm: React.FC<DeviceFormpRrops> = () => {
             onBlur={createForm.handleBlur}>
             <option>Select Type</option>
             {types.map((type) => (
-              <option value={type.id}>{type.name}</option>
+              <option key={type.id} value={type.id}>
+                {type.name}
+              </option>
             ))}
           </Form.Select>
         </Form.Group>
@@ -129,7 +150,9 @@ const DeviceForm: React.FC<DeviceFormpRrops> = () => {
             onBlur={createForm.handleBlur}>
             <option>Select Brand</option>
             {brands.map((brand) => (
-              <option value={brand.id}>{brand.name}</option>
+              <option key={brand.id} value={brand.id}>
+                {brand.name}
+              </option>
             ))}
           </Form.Select>
         </Form.Group>

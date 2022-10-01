@@ -1,22 +1,30 @@
 import React from 'react';
 import DeviceForm from '../components/DeviceForm';
 import CreateCategoriesForm from '../components/CreateCategoriesForm';
-import Loader from '../components/Loader';
+import ModalPost from '../components/Modal';
+import ModalLoader from '../components/ModalLoader';
 import { useAppSelector } from '../hooks';
 
 const Admin = () => {
-  const isLoadingBrand = useAppSelector((store) => store.brands.statusPOST) === 'loading';
-  const isLoadingType = useAppSelector((store) => store.types.statusPOST) === 'loading';
-  const isLoadingDevice = useAppSelector((store) => store.device.statusPOST) === 'loading';
-  // const isErrorBrand = useAppSelector((store) => store.brands.statusPOST) === 'error';
-  // const isErrorType = useAppSelector((store) => store.types.statusPOST) === 'error';
-  // const isErrorDevice = useAppSelector((store) => store.device.statusPOST) === 'error';
+  const statusType = useAppSelector((store) => store.types.statusPOST);
+  const statusBrand = useAppSelector((store) => store.brands.statusPOST);
+  const statusDevice = useAppSelector((store) => store.device.statusPOST);
 
   return (
     <div className="d-flex justify-content-between flex-wrap mb-5">
-      {isLoadingBrand ? <Loader styles="m-auto" /> : <CreateCategoriesForm name="Brand" />}
-      {isLoadingType ? <Loader styles="m-auto" /> : <CreateCategoriesForm name="Type" />}
-      {isLoadingDevice ? <Loader styles="m-auto" /> : <DeviceForm />}
+      <CreateCategoriesForm name="Brand" />
+      <CreateCategoriesForm name="Type" />
+      <DeviceForm />
+      {(statusType === 'loading' || statusBrand === 'loading' || statusDevice === 'loading') && (
+        <ModalLoader />
+      )}
+      {(statusType === 'loaded' || statusBrand === 'loaded' || statusDevice === 'loaded') && (
+        <ModalPost color="#29a329" message="Succesful" />
+      )}
+
+      {(statusType === 'error' || statusBrand === 'error' || statusDevice === 'error') && (
+        <ModalPost color="#e60000" message="Error" />
+      )}
     </div>
   );
 };

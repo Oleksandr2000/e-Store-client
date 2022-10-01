@@ -1,8 +1,9 @@
 import React from 'react';
-import { Brand, setActiveBrand } from '../redux/slice/BrandSlice';
-import { Type, setActiveType } from '../redux/slice/TypeSlice';
+import { setActiveBrand } from '../redux/slice/BrandSlice';
+import { setActiveType } from '../redux/slice/TypeSlice';
 import { useAppDispatch, useAppSelector } from '../hooks';
 import { setActivePage } from '../redux/slice/DeviceSlice';
+import { Brand, Type } from '../types';
 
 const Filter = () => {
   const dispatch = useAppDispatch();
@@ -26,10 +27,11 @@ const Filter = () => {
       <div>
         <div className="filter__item mb-4">
           {brands.map((brand: Brand) => (
-            <div className="filter__checkbox" onClick={() => addABrandFilter(brand.id)}>
-              <div key={brand.id} className="filter__title">
-                {brand.name}
-              </div>
+            <div
+              key={brand.id}
+              className="filter__checkbox"
+              onClick={() => addABrandFilter(brand.id)}>
+              <div className="filter__title">{brand.name}</div>
               <button className={activeBrands.includes(brand.id) ? 'checkbox-active' : 'checkbox'}>
                 <span>✓</span>
               </button>
@@ -40,10 +42,8 @@ const Filter = () => {
       <div>
         <div className="filter__item-last mb-4">
           {types.map((type: Type) => (
-            <div className="filter__checkbox" onClick={() => addATypeFilter(type.id)}>
-              <div key={type.id} className="filter__title">
-                {type.name}
-              </div>
+            <div key={type.id} className="filter__checkbox" onClick={() => addATypeFilter(type.id)}>
+              <div className="filter__title">{type.name}</div>
               <button className={activeType.includes(type.id) ? 'checkbox-active' : 'checkbox'}>
                 <span>✓</span>
               </button>

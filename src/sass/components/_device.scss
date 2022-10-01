@@ -2,7 +2,7 @@
 
 .device {
   margin-top: 50px;
-  min-height: 70vh;
+  min-height: 100vh;
   &__wrapper {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
