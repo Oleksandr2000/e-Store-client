@@ -8,6 +8,7 @@ import Form from 'react-bootstrap/Form';
 import Modal from 'react-bootstrap/Modal';
 import NoDevice from '../components/NoDevice';
 import { calcTotalCount, calcTotalPrice } from '../services';
+import ModalLoader from '../components/ModalLoader';
 
 const Basket = () => {
   const { basket, guestBasket } = useAppSelector((store) => store.basket);
@@ -47,10 +48,6 @@ const Basket = () => {
       setShow(false);
     }
   };
-
-  if (isLoadingBasket || isLoadingUser || isConfirm || isAddDevice) {
-    return <Loader styles={'loader'} />;
-  }
 
   return (
     <div className="basket">
@@ -110,6 +107,7 @@ const Basket = () => {
           </Button>
         </Modal.Footer>
       </Modal>
+      {(isLoadingBasket || isLoadingUser || isConfirm || isAddDevice) && <ModalLoader />}
     </div>
   );
 };

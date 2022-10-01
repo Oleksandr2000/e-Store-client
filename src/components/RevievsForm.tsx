@@ -6,8 +6,11 @@ import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import { useAppDispatch, useAppSelector } from '../hooks';
 import { postReviews } from '../redux/slice/UserSlice';
+import { fetchOneDevice } from '../redux/slice/DeviceSlice';
+import { useParams } from 'react-router';
 
 const RevievsForm = () => {
+  const { id } = useParams();
   const dispatch = useAppDispatch();
   const { device } = useAppSelector((store) => store.device);
   const { user } = useAppSelector((store) => store.user.data);
@@ -24,9 +27,9 @@ const RevievsForm = () => {
         .required('Обьязательное поле'),
     }),
 
-    onSubmit: (values) => {
-      console.log(values);
-      dispatch(postReviews(values));
+    onSubmit: async (values) => {
+      await dispatch(postReviews(values));
+      dispatch(fetchOneDevice({ id: Number(id) }));
     },
   });
 

@@ -6,6 +6,7 @@ import { useAppDispatch, useAppSelector } from '../hooks';
 import { fetchOneDevice, fetchAllSale } from '../redux/slice/DeviceSlice';
 import { addProduct, fetchAdd } from '../redux/slice/BasketSlice';
 import { BasketDevice } from '../types';
+import ModalLoader from '../components/ModalLoader';
 
 const DevicePage: React.FC = () => {
   const { id } = useParams();
@@ -18,6 +19,7 @@ const DevicePage: React.FC = () => {
   const isLoadingTypes = useAppSelector((store) => store.types.status) === 'loading';
   const isLoadingItems = useAppSelector((store) => store.device.status) === 'loading';
   const isAddDevice = useAppSelector((store) => store.basket.statusAdd) === 'loading';
+  const isAddReviews = useAppSelector((store) => store.user.statusPOST) === 'loading';
 
   const deviceType = types.filter((type) => type.id == device.typeId);
 
@@ -51,7 +53,7 @@ const DevicePage: React.FC = () => {
     }
   };
 
-  if (isLoadingBrands || isLoadingTypes || isLoadingItems || isAddDevice || !status) {
+  if (isLoadingBrands || isLoadingTypes || isLoadingItems || !status) {
     return <Loader styles={'loader'} />;
   }
 
@@ -149,6 +151,8 @@ const DevicePage: React.FC = () => {
         </div>
       </div>
       <AdditionalDeviceBar />
+      {isAddDevice && <ModalLoader />}
+      {isAddReviews && <ModalLoader />}
     </div>
   );
 };

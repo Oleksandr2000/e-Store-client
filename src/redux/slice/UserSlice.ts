@@ -44,6 +44,7 @@ export const fetchAuth = createAsyncThunk<userResponce>('user/fetchAuth', async 
 interface UserState {
   data: userResponce;
   status: string;
+  statusPOST: string | null;
 }
 
 const initialState: UserState = {
@@ -56,6 +57,7 @@ const initialState: UserState = {
     },
   },
   status: 'loading',
+  statusPOST: null,
 };
 
 const userSlice = createSlice({
@@ -106,13 +108,13 @@ const userSlice = createSlice({
         state.data.token = null;
       })
       .addCase(postReviews.pending, (state) => {
-        state.status = 'loading';
+        state.statusPOST = 'loading';
       })
       .addCase(postReviews.fulfilled, (state) => {
-        state.status = 'loaded';
+        state.statusPOST = 'loaded';
       })
       .addCase(postReviews.rejected, (state) => {
-        state.status = 'error';
+        state.statusPOST = 'error';
       });
   },
 });
