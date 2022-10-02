@@ -14,6 +14,7 @@ import {
 import { logout } from '../redux/slice/UserSlice';
 import { Container } from 'react-bootstrap';
 import { calcTotalCount } from '../services';
+import SearchPanel from './SearchPanel';
 
 const Header = () => {
   const isAuth = useAppSelector((store) => store.user.data.token);
@@ -24,59 +25,64 @@ const Header = () => {
   const totalGuestCount = calcTotalCount(guestBasket);
 
   return (
-    <div className="header">
-      <Container className="header__wrapper">
-        <Link to={HOME_ROUTE}>
-          <div className="header__logo">
-            <img src="/logo-eStore.svg" alt="eStore" className="logo" />
-          </div>
-        </Link>
+    <>
+      <div className="header">
+        <Container className="header__wrapper">
+          <Link to={HOME_ROUTE}>
+            <div className="header__logo">
+              <img src="/logo-eStore.svg" alt="eStore" className="logo" />
+            </div>
+          </Link>
 
-        {isAuth ? (
-          <div className="header__nav">
-            <Link to={SHOP_ROUTE}>
-              <Button variant="primary">All products</Button>
-            </Link>
-            <Link to={BASKET_ROUTE}>
-              <Button variant="warning">
-                Basket {' | '}
-                {totalBasketCount}
+          {isAuth ? (
+            <div className="header__nav">
+              <Link to={SHOP_ROUTE}>
+                <Button variant="primary">All products</Button>
+              </Link>
+              <Link to={BASKET_ROUTE}>
+                <Button variant="warning">
+                  Basket {' | '}
+                  {totalBasketCount}
+                </Button>
+              </Link>
+              <Link to={ADMIN_ROUTE}>
+                <Button variant="warning">Admin</Button>
+              </Link>
+              <Link to={ABOUT_ROUTE}>
+                <Button variant="primary">About</Button>
+              </Link>
+              <Button variant="danger" onClick={() => dispatch(logout())}>
+                Log Out
               </Button>
-            </Link>
-            <Link to={ADMIN_ROUTE}>
-              <Button variant="warning">Admin</Button>
-            </Link>
-            <Link to={ABOUT_ROUTE}>
-              <Button variant="primary">About</Button>
-            </Link>
-            <Button variant="danger" onClick={() => dispatch(logout())}>
-              Log Out
-            </Button>
-          </div>
-        ) : (
-          <div className="header__nav">
-            <Link to={SHOP_ROUTE}>
-              <Button variant="primary">All products</Button>
-            </Link>
-            <Link to={BASKET_ROUTE}>
-              <Button variant="warning">
-                Basket {' | '}
-                {totalGuestCount}
-              </Button>
-            </Link>
-            <Link to={ABOUT_ROUTE}>
-              <Button variant="primary">About</Button>
-            </Link>
-            <Link to={LOGIN_ROUTE}>
-              <Button variant="primary">Login</Button>
-            </Link>
-            <Link to={REGISTER_ROUTE}>
-              <Button variant="primary">Register</Button>
-            </Link>
-          </div>
-        )}
-      </Container>
-    </div>
+            </div>
+          ) : (
+            <div className="header__nav">
+              <Link to={SHOP_ROUTE}>
+                <Button variant="primary">All products</Button>
+              </Link>
+              <Link to={BASKET_ROUTE}>
+                <Button variant="warning">
+                  Basket {' | '}
+                  {totalGuestCount}
+                </Button>
+              </Link>
+              <Link to={ABOUT_ROUTE}>
+                <Button variant="primary">About</Button>
+              </Link>
+              <Link to={LOGIN_ROUTE}>
+                <Button variant="primary">Login</Button>
+              </Link>
+              <Link to={REGISTER_ROUTE}>
+                <Button variant="primary">Register</Button>
+              </Link>
+            </div>
+          )}
+        </Container>
+      </div>
+      <div className="subheader">
+        <SearchPanel />
+      </div>
+    </>
   );
 };
 

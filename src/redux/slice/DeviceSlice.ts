@@ -9,12 +9,36 @@ export const createDevice = createAsyncThunk<void, any>('device/createDevice', a
 
 export const fetchAllDevice = createAsyncThunk<
   DeviceRes,
-  { filterBrand: string | null; filterType: string | null; limit: number; page: number }
+  {
+    filterBrand: string | null;
+    filterType: string | null;
+    limit: number;
+    page: number;
+  }
 >('device/fetchAllDevice', async (params) => {
   const { filterBrand, filterType, limit, page } = params;
+
   const { data } = await axios.get(
     `/device/?brandId=${filterBrand}&typeId=${filterType}&limit=${limit}&page=${page}`,
   );
+
+  return data;
+});
+
+export const fetchSearchDevice = createAsyncThunk<
+  Device[],
+  {
+    filterBrand: string | null;
+    filterType: string | null;
+    str: string | null;
+  }
+>('device/fetchSearchDevice', async (params) => {
+  const { filterBrand, filterType, str } = params;
+
+  const { data } = await axios.get(
+    `/device/?brandId=${filterBrand}&typeId=${filterType}&str=${str}`,
+  );
+
   return data;
 });
 
@@ -46,11 +70,14 @@ interface DeviceState {
   items: DeviceRes;
   hits: Device[];
   sale: Device[];
+  searchItems: Device[];
   device: Device;
   status: string | null;
+  searchLoading: string | null;
   statusPOST: string | null;
   limit: number;
   page: number;
+  searchValue: string;
 }
 
 const initialState: DeviceState = {
@@ -58,6 +85,7 @@ const initialState: DeviceState = {
     count: 0,
     rows: [],
   },
+  searchItems: [],
   hits: [],
   sale: [],
   device: {
@@ -75,8 +103,10 @@ const initialState: DeviceState = {
   },
   status: null,
   statusPOST: null,
+  searchLoading: null,
   limit: 6,
   page: 1,
+  searchValue: '',
 };
 
 const deviceSlice = createSlice({
@@ -88,6 +118,9 @@ const deviceSlice = createSlice({
     },
     clearStatusPost: (state) => {
       state.statusPOST = null;
+    },
+    setSearchValue: (state, action) => {
+      state.searchValue = action.payload;
     },
   },
   extraReducers: (builder) => {
@@ -110,6 +143,16 @@ const deviceSlice = createSlice({
       })
       .addCase(fetchAllDevice.rejected, (state) => {
         state.status = 'error';
+      })
+      .addCase(fetchSearchDevice.pending, (state) => {
+        state.searchLoading = 'loading';
+      })
+      .addCase(fetchSearchDevice.fulfilled, (state, action) => {
+        state.searchLoading = 'loaded';
+        state.searchItems = action.payload;
+      })
+      .addCase(fetchSearchDevice.rejected, (state) => {
+        state.searchLoading = 'error';
       })
       .addCase(fetchOneDevice.pending, (state) => {
         state.status = 'loading';
@@ -144,6 +187,6 @@ const deviceSlice = createSlice({
   },
 });
 
-export const { setActivePage, clearStatusPost } = deviceSlice.actions;
+export const { setActivePage, clearStatusPost, setSearchValue } = deviceSlice.actions;
 
 export default deviceSlice.reducer;

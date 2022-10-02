@@ -1,14 +1,27 @@
 import React from 'react';
 import Slider from '../components/Slider';
 import { useAppDispatch, useAppSelector } from '../hooks';
-import { fetchAllHit, fetchAllSale } from '../redux/slice/DeviceSlice';
+import { fetchAllHit, fetchAllSale, setSearchValue } from '../redux/slice/DeviceSlice';
 import Loader from '../components/Loader';
 import Grid from '../components/Grid';
 import SearchPanel from '../components/SearchPanel';
+import { Button } from 'react-bootstrap';
 
 const Home = () => {
   const dispatch = useAppDispatch();
 
+  const buttons: string[] = [
+    'iPhone',
+    'Xiaomi',
+    'Samsung',
+    'Meizu',
+    'Sony',
+    'iPhone',
+    'Xiaomi',
+    'Samsung',
+    'Meizu',
+    'Sony',
+  ];
   const { sale, hits, status } = useAppSelector((store) => store.device);
   const isLoadingItems = useAppSelector((store) => store.device.status) === 'loading';
 
@@ -27,7 +40,23 @@ const Home = () => {
       {hits.length > 0 ? <Slider items={hits} title="Most Popular Goods" /> : null}
 
       <Grid />
-      <SearchPanel />
+      <div className="search">
+        <div className="search__control">
+          <SearchPanel />
+        </div>
+        <div className="search__buttons d-flex justify-content-around flex-wrap mt-5">
+          {buttons.map((item) => (
+            <Button
+              variant="success"
+              className="m-2"
+              onClick={() => {
+                dispatch(setSearchValue(item));
+              }}>
+              {item}
+            </Button>
+          ))}
+        </div>
+      </div>
     </div>
   );
 };

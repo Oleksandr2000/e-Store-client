@@ -12,9 +12,17 @@
   }
 }
 
-.search-panel {
-  width: 500px;
-  margin: 100px auto;
+.search {
+  margin: 0 auto;
+  width: 600px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-top: 100px;
+  margin-bottom: 50px;
+  &__control {
+    margin: 0 auto;
+  }
 }
 
 .slider-hit {

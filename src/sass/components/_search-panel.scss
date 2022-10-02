@@ -1,0 +1,19 @@
+.search {
+  &-panel {
+    width: 500px;
+  }
+  &__input {
+    position: relative;
+  }
+  &__icon {
+    position: absolute;
+    top: 11px;
+    right: 15px;
+    font-size: 16px;
+    cursor: pointer;
+  }
+}
+
+.modal-content {
+  background: rgba(250, 250, 250);
+}
