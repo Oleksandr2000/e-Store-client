@@ -5,7 +5,8 @@ import { fetchAllHit, fetchAllSale, setSearchValue } from '../redux/slice/Device
 import Loader from '../components/Loader';
 import Grid from '../components/Grid';
 import SearchPanel from '../components/SearchPanel';
-import { Button } from 'react-bootstrap';
+import { Button, Container } from 'react-bootstrap';
+import MainSlider from '../components/MainSlider';
 
 const Home = () => {
   const dispatch = useAppDispatch();
@@ -36,27 +37,30 @@ const Home = () => {
 
   return (
     <div className="main-page">
-      {sale.length > 0 ? <Slider items={sale} title="Sale" /> : null}
-      {hits.length > 0 ? <Slider items={hits} title="Most Popular Goods" /> : null}
+      <MainSlider />
+      <Container>
+        {sale.length > 0 ? <Slider items={sale} title="Sale" /> : null}
+        {hits.length > 0 ? <Slider items={hits} title="Most Popular Goods" /> : null}
 
-      <Grid />
-      <div className="search">
-        <div className="search__control">
-          <SearchPanel />
+        <Grid />
+        <div className="search">
+          <div className="search__control">
+            <SearchPanel />
+          </div>
+          <div className="search__buttons d-flex justify-content-around flex-wrap mt-5">
+            {buttons.map((item) => (
+              <Button
+                variant="success"
+                className="m-2"
+                onClick={() => {
+                  dispatch(setSearchValue(item));
+                }}>
+                {item}
+              </Button>
+            ))}
+          </div>
         </div>
-        <div className="search__buttons d-flex justify-content-around flex-wrap mt-5">
-          {buttons.map((item) => (
-            <Button
-              variant="success"
-              className="m-2"
-              onClick={() => {
-                dispatch(setSearchValue(item));
-              }}>
-              {item}
-            </Button>
-          ))}
-        </div>
-      </div>
+      </Container>
     </div>
   );
 };

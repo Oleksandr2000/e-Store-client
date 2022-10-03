@@ -36,7 +36,14 @@ const CartItem: React.FC<CartItemProps> = ({
       <Card.Img variant="top" src={`http://localhost:4444/${img}`} height={300} className="mt-5" />
       <Card.Body>
         <Card.Title style={{ height: '50px' }}>{name}</Card.Title>
-        <Card.Text>{price}</Card.Text>
+        {sale ? (
+          <Card.Text style={{ color: 'rgb(245, 40, 60)' }}>
+            {Math.round(price - (price * discount) / 100)}
+          </Card.Text>
+        ) : (
+          <Card.Text>{price}</Card.Text>
+        )}
+
         <Card.Text>
           {brands
             .filter((brand) => brand.id === brandId)

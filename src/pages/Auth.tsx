@@ -1,5 +1,5 @@
 import React from 'react';
-import { Card, Row } from 'react-bootstrap';
+import { Card, Container, Row } from 'react-bootstrap';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import { Link, Navigate, useLocation } from 'react-router-dom';
@@ -49,47 +49,57 @@ const Login = () => {
   }
 
   return (
-    <div className="auth">
-      <Card style={{ width: 600 }} className="m-auto">
-        <h2 className="m-auto mt-2">{isLogin ? 'Login' : 'Registration'}</h2>
-        <Form className="m-4" onSubmit={authForm.handleSubmit}>
-          <Form.Group className="mb-3" controlId="formBasicEmail">
-            <Form.Label>Email address</Form.Label>
-            <Form.Control name="email" placeholder="Enter email" onChange={authForm.handleChange} />
-            {authForm.errors.email && authForm.touched.email ? (
-              <div>{authForm.errors.email}</div>
-            ) : null}
-          </Form.Group>
+    <Container>
+      <div className="auth">
+        <Card style={{ width: 600 }} className="m-auto">
+          <h2 className="m-auto mt-2">{isLogin ? 'Login' : 'Registration'}</h2>
+          <Form className="m-4" onSubmit={authForm.handleSubmit}>
+            <Form.Group className="mb-3" controlId="formBasicEmail">
+              <Form.Label>Email address</Form.Label>
+              <Form.Control
+                name="email"
+                placeholder="Enter email"
+                onChange={authForm.handleChange}
+              />
+              {authForm.errors.email && authForm.touched.email ? (
+                <div>{authForm.errors.email}</div>
+              ) : null}
+            </Form.Group>
 
-          <Form.Group className="mb-3" controlId="formBasicPassword">
-            <Form.Label>Password</Form.Label>
-            <Form.Control
-              type="password"
-              name="password"
-              placeholder="Password"
-              onChange={authForm.handleChange}
-            />
-            {authForm.errors.password && authForm.touched.password ? (
-              <div>{authForm.errors.password}</div>
-            ) : null}
-          </Form.Group>
-          <Row className="d-flex justify-content-between">
-            {isLogin ? (
-              <div>
-                You haven`t account? <Link to={REGISTER_ROUTE}>Registration</Link>
-              </div>
-            ) : (
-              <div>
-                You have account? <Link to={LOGIN_ROUTE}>Login</Link>
-              </div>
-            )}
-            <Button variant="primary" type="submit" className="mt-4 m-auto" style={{ width: 200 }}>
-              {isLogin ? 'Login' : 'Registration'}
-            </Button>
-          </Row>
-        </Form>
-      </Card>
-    </div>
+            <Form.Group className="mb-3" controlId="formBasicPassword">
+              <Form.Label>Password</Form.Label>
+              <Form.Control
+                type="password"
+                name="password"
+                placeholder="Password"
+                onChange={authForm.handleChange}
+              />
+              {authForm.errors.password && authForm.touched.password ? (
+                <div>{authForm.errors.password}</div>
+              ) : null}
+            </Form.Group>
+            <Row className="d-flex justify-content-between">
+              {isLogin ? (
+                <div>
+                  You haven`t account? <Link to={REGISTER_ROUTE}>Registration</Link>
+                </div>
+              ) : (
+                <div>
+                  You have account? <Link to={LOGIN_ROUTE}>Login</Link>
+                </div>
+              )}
+              <Button
+                variant="primary"
+                type="submit"
+                className="mt-4 m-auto"
+                style={{ width: 200 }}>
+                {isLogin ? 'Login' : 'Registration'}
+              </Button>
+            </Row>
+          </Form>
+        </Card>
+      </div>
+    </Container>
   );
 };
 

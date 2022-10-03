@@ -16,12 +16,7 @@ const ModalLoader = () => {
   };
 
   return (
-    <Modal
-      show={show}
-      onHide={handleClose}
-      backdrop="static"
-      keyboard={false}
-      className="mt-5 pt-5 post">
+    <Modal show={show} onHide={handleClose} backdrop="static" keyboard={false} className="post">
       <Modal.Body className="post-loader">
         <img src="/Spinner.png" alt="loading" />
       </Modal.Body>

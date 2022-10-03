@@ -38,17 +38,15 @@ function App() {
   return (
     <>
       <Header />
-      <Container>
-        <Routes>
-          {isAuth &&
-            authRoutes.map((route: any, i: number) => (
-              <Route path={route.path} element={<route.element />} key={i} />
-            ))}
-          {publicRoutes.map((route: any, i: number) => (
+      <Routes>
+        {isAuth &&
+          authRoutes.map((route: any, i: number) => (
             <Route path={route.path} element={<route.element />} key={i} />
           ))}
-        </Routes>
-      </Container>
+        {publicRoutes.map((route: any, i: number) => (
+          <Route path={route.path} element={<route.element />} key={i} />
+        ))}
+      </Routes>
       <Footer />
     </>
   );

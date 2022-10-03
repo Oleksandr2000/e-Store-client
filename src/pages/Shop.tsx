@@ -3,12 +3,11 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Filter from '../components/Filter';
 import CartItem from '../components/CartItem';
-import { Card, Pagination } from 'react-bootstrap';
+import { Card, Container, Pagination } from 'react-bootstrap';
 import { useAppDispatch, useAppSelector } from '../hooks';
-import { fetchBrands } from '../redux/slice/BrandSlice';
 import { fetchAllDevice, setActivePage } from '../redux/slice/DeviceSlice';
-import { fetchType } from '../redux/slice/TypeSlice';
 import NoDevice from '../components/NoDevice';
+import Skeleton from '../components/Skeleton';
 import Loader from '../components/Loader';
 
 const Shop = () => {
@@ -25,8 +24,6 @@ const Shop = () => {
     arrPage.push(i + 1);
   }
 
-  const isLoadingBrands = useAppSelector((store) => store.brands.status) === 'loading';
-  const isLoadingTypes = useAppSelector((store) => store.types.status) === 'loading';
   const isLoadingItems = useAppSelector((store) => store.device.status) === 'loading';
 
   React.useEffect(() => {
@@ -41,52 +38,46 @@ const Shop = () => {
     );
   }, [page, activeBrands, activeType]);
 
-  React.useEffect(() => {
-    dispatch(fetchBrands());
-  }, []);
-
-  React.useEffect(() => {
-    dispatch(fetchType());
-  }, []);
-
   const setPage = (i: number) => {
     dispatch(setActivePage(i));
   };
 
-  if (isLoadingBrands || isLoadingTypes || isLoadingItems || !status) {
-    return <Loader styles={'loader'} />;
-  }
-
   return (
     <>
-      <Row className="device">
-        <Col xs={2}>
-          <Card className="p-3 device__card">
-            <Filter />
-          </Card>
-        </Col>
+      <Container>
+        <Row className="device">
+          <Col xs={2}>
+            <Card className="p-3 device__card">
+              <Filter />
+            </Card>
+          </Col>
 
-        {items.rows.length > 0 ? (
-          <Col xs={10} className="device__wrapper mb-5">
-            {items.rows.map((item) => (
-              <CartItem {...item} key={item.id} />
+          {items.rows.length === 0 && !isLoadingItems ? (
+            <Col xs={10} className="mb-5">
+              <NoDevice />
+            </Col>
+          ) : (
+            <Col xs={10} className="device__wrapper mb-5">
+              {isLoadingItems
+                ? [...Array(6)].map((item) => (
+                    <div className="m-auto">
+                      <Skeleton />
+                    </div>
+                  ))
+                : items.rows.map((item) => <CartItem {...item} key={item.id} />)}
+            </Col>
+          )}
+        </Row>
+        <Row className="mb-5">
+          <Pagination>
+            {arrPage.map((item, i) => (
+              <Pagination.Item active={page === item} onClick={() => setPage(item)} key={i}>
+                {item}
+              </Pagination.Item>
             ))}
-          </Col>
-        ) : (
-          <Col xs={10} className="mb-5">
-            <NoDevice />
-          </Col>
-        )}
-      </Row>
-      <Row className="mb-5">
-        <Pagination>
-          {arrPage.map((item, i) => (
-            <Pagination.Item active={page === item} onClick={() => setPage(item)} key={i}>
-              {item}
-            </Pagination.Item>
-          ))}
-        </Pagination>
-      </Row>
+          </Pagination>
+        </Row>
+      </Container>
     </>
   );
 };

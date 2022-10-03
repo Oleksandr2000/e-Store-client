@@ -7,6 +7,7 @@ import { fetchOneDevice, fetchAllSale } from '../redux/slice/DeviceSlice';
 import { addProduct, fetchAdd } from '../redux/slice/BasketSlice';
 import { BasketDevice } from '../types';
 import ModalLoader from '../components/ModalLoader';
+import { Container } from 'react-bootstrap';
 
 const DevicePage: React.FC = () => {
   const { id } = useParams();
@@ -58,7 +59,7 @@ const DevicePage: React.FC = () => {
   }
 
   return (
-    <div>
+    <Container>
       <div className="device">
         <div className="device__image">
           <img src={`http://localhost:4444/${device.img}`} alt="logo" />
@@ -153,7 +154,7 @@ const DevicePage: React.FC = () => {
       <AdditionalDeviceBar />
       {isAddDevice && <ModalLoader />}
       {isAddReviews && <ModalLoader />}
-    </div>
+    </Container>
   );
 };
 

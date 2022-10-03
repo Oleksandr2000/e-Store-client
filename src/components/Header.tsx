@@ -24,6 +24,12 @@ const Header = () => {
   const totalBasketCount = calcTotalCount(basket.items);
   const totalGuestCount = calcTotalCount(guestBasket);
 
+  const handleLogout = () => {
+    if (window.confirm('Are you sure you want to log')) {
+      dispatch(logout());
+    }
+  };
+
   return (
     <>
       <div className="header">
@@ -51,7 +57,7 @@ const Header = () => {
               <Link to={ABOUT_ROUTE}>
                 <Button variant="primary">About</Button>
               </Link>
-              <Button variant="danger" onClick={() => dispatch(logout())}>
+              <Button variant="danger" onClick={handleLogout}>
                 Log Out
               </Button>
             </div>

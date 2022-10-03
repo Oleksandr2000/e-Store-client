@@ -9,6 +9,7 @@ import Modal from 'react-bootstrap/Modal';
 import NoDevice from '../components/NoDevice';
 import { calcTotalCount, calcTotalPrice } from '../services';
 import ModalLoader from '../components/ModalLoader';
+import { Container } from 'react-bootstrap';
 
 const Basket = () => {
   const { basket, guestBasket } = useAppSelector((store) => store.basket);
@@ -50,65 +51,67 @@ const Basket = () => {
   };
 
   return (
-    <div className="basket">
-      <h1>Basket</h1>
-      {basket.items?.length < 1 && guestBasket.length < 1 ? (
-        <NoDevice />
-      ) : (
-        <>
-          <div className="basket__wrapper">
-            {token
-              ? basket.items.map((item: any, i: number) => <BasketItem key={i} {...item} />)
-              : guestBasket.map((item: any, i: number) => <BasketItem key={i} {...item} />)}
-          </div>
-          <div className="basket__footer">
-            <div className="basket__info">
-              <div className="basket__sum">
-                Sum: <span className="gold">{token ? totalPrice : totalGuestPrice}</span>
-              </div>
-              <div className="basket__count">
-                Count: <span className="gold">{token ? totalBaketCount : totalGuestCount}</span>
-              </div>
+    <Container>
+      <div className="basket">
+        <h1>Basket</h1>
+        {basket.items?.length < 1 && guestBasket.length < 1 ? (
+          <NoDevice />
+        ) : (
+          <>
+            <div className="basket__wrapper">
+              {token
+                ? basket.items.map((item: any, i: number) => <BasketItem key={i} {...item} />)
+                : guestBasket.map((item: any, i: number) => <BasketItem key={i} {...item} />)}
             </div>
-            <button
-              className="confirm"
-              onClick={token ? () => confirmOrder({ id: user.id }) : () => handleShow()}>
-              Confirm order
-            </button>
-          </div>
-        </>
-      )}
-      <Modal show={show} onHide={handleClose}>
-        <Modal.Header closeButton>
-          <Modal.Title>Order</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-          <Form>
-            <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
-              <Form.Label>Email address</Form.Label>
-              <Form.Control
-                type="email"
-                placeholder="name@example.com"
-                value={value}
-                onChange={(e) => setValue(e.target.value)}
-                autoFocus
-              />
-            </Form.Group>
-          </Form>
-        </Modal.Body>
-        <Modal.Footer>
-          <Button variant="secondary" onClick={handleClose}>
-            Close
-          </Button>
-          <Button
-            variant="primary"
-            onClick={() => confirmOrder({ guestBasket: guestBasketId, email: value })}>
-            Condirm Order
-          </Button>
-        </Modal.Footer>
-      </Modal>
-      {(isLoadingBasket || isLoadingUser || isConfirm || isAddDevice) && <ModalLoader />}
-    </div>
+            <div className="basket__footer">
+              <div className="basket__info">
+                <div className="basket__sum">
+                  Sum: <span className="gold">{token ? totalPrice : totalGuestPrice}</span>
+                </div>
+                <div className="basket__count">
+                  Count: <span className="gold">{token ? totalBaketCount : totalGuestCount}</span>
+                </div>
+              </div>
+              <button
+                className="confirm"
+                onClick={token ? () => confirmOrder({ id: user.id }) : () => handleShow()}>
+                Confirm order
+              </button>
+            </div>
+          </>
+        )}
+        <Modal show={show} onHide={handleClose}>
+          <Modal.Header closeButton>
+            <Modal.Title>Order</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+            <Form>
+              <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
+                <Form.Label>Email address</Form.Label>
+                <Form.Control
+                  type="email"
+                  placeholder="name@example.com"
+                  value={value}
+                  onChange={(e) => setValue(e.target.value)}
+                  autoFocus
+                />
+              </Form.Group>
+            </Form>
+          </Modal.Body>
+          <Modal.Footer>
+            <Button variant="secondary" onClick={handleClose}>
+              Close
+            </Button>
+            <Button
+              variant="primary"
+              onClick={() => confirmOrder({ guestBasket: guestBasketId, email: value })}>
+              Condirm Order
+            </Button>
+          </Modal.Footer>
+        </Modal>
+        {(isLoadingBasket || isLoadingUser || isConfirm || isAddDevice) && <ModalLoader />}
+      </div>
+    </Container>
   );
 };
 
