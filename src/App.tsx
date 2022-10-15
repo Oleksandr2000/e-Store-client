@@ -4,7 +4,6 @@ import { authRoutes, publicRoutes } from './routes';
 import Header from './components/Header';
 import './sass/app.scss';
 import { useAppDispatch, useAppSelector } from './hooks';
-import Container from 'react-bootstrap/Container';
 import { fetchBrands } from './redux/slice/BrandSlice';
 import { fetchType } from './redux/slice/TypeSlice';
 
@@ -17,6 +16,8 @@ function App() {
   const dispatch = useAppDispatch();
   const { id } = useAppSelector((store) => store.user.data.user);
   const { statusConfirm, statusAdd, status } = useAppSelector((store) => store.basket);
+  const isFetchType = useAppSelector((store) => store.types.statusPOST) === 'loaded';
+  const isFetchBrand = useAppSelector((store) => store.brands.statusPOST) === 'loaded';
 
   const fetchEffect = (id: number) => {
     if (isAuth) {
@@ -33,7 +34,7 @@ function App() {
     dispatch(fetchBrands());
 
     dispatch(fetchAuth());
-  }, []);
+  }, [isFetchType, isFetchBrand]);
 
   return (
     <>

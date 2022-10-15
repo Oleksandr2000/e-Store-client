@@ -1,7 +1,7 @@
 import React from 'react';
-import { useAppDispatch, useAppSelector } from '../hooks';
-import { fetchAdd, fetchRemove, minusItem, removeProduct } from '../redux/slice/BasketSlice';
-import { addProduct } from '../redux/slice/BasketSlice';
+import { useAppDispatch, useAppSelector } from '../../hooks';
+import { fetchAdd, fetchRemove, minusItem, removeProduct } from '../../redux/slice/BasketSlice';
+import { addProduct } from '../../redux/slice/BasketSlice';
 
 interface BasketItemProps {
   id: number;
@@ -48,7 +48,7 @@ const BasketItem: React.FC<BasketItemProps> = ({ id, name, price, img, basketDev
 
   return (
     <div className="basket-item">
-      <img src={`http://localhost:4444/${img}`} alt="img" />
+      <img src={`http://localhost:5000/${img}`} alt="img" />
       <div className="basket-item__name">{name}</div>
       <div className="basket-item__price">{price * basketDevice[0].count}</div>
       <div className="basket-item__count">

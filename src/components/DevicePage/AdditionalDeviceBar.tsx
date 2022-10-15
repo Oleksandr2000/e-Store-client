@@ -1,7 +1,7 @@
 import React from 'react';
-import Slider from './Slider';
-import { useAppSelector } from '../hooks';
-import Revievs from './Revievs';
+import Slider from '../Slider';
+import { useAppSelector } from '../../hooks';
+import Revievs from '../Revievs';
 
 const AdditionalDeviceBar = () => {
   const { sale } = useAppSelector((store) => store.device);

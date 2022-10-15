@@ -1,9 +1,9 @@
 import React from 'react';
 import { Modal, ModalDialog } from 'react-bootstrap';
-import { useAppDispatch } from '../hooks';
-import { clearStatusBrand } from '../redux/slice/BrandSlice';
-import { clearStatusType } from '../redux/slice/TypeSlice';
-import Loader from './Loader';
+import { useAppDispatch } from '../../hooks';
+import { clearStatusBrand } from '../../redux/slice/BrandSlice';
+import { clearStatusType } from '../../redux/slice/TypeSlice';
+import Loader from '../Loader';
 
 const ModalLoader = () => {
   const [show, setShow] = React.useState(true);

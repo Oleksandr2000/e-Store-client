@@ -14,12 +14,9 @@ const SearchPanel = () => {
   const { pathname } = useLocation();
   const dispatch = useAppDispatch();
 
-  console.log(pathname);
-
   async function handleShow() {
-    if (pathname !== '/shop') {
-      await dispatch(fetchSearchDevice({ filterBrand: '', filterType: '', str: value }));
-    }
+    await dispatch(fetchSearchDevice({ filterBrand: '', filterType: '', str: value }));
+
     setShow(true);
   }
 
@@ -32,7 +29,7 @@ const SearchPanel = () => {
           value={value}
           onChange={(e) => dispatch(setSearchValue(e.target.value))}
         />
-        <img className="search__icon" src="search.svg" alt="Search" onClick={handleShow} />
+        <img className="search__icon" src="/search.svg" alt="Search" onClick={handleShow} />
       </div>
       <Modal show={show} fullscreen={true} onHide={() => setShow(false)}>
         <Modal.Header closeButton>

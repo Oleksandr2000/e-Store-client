@@ -1,6 +1,9 @@
 @import './components/index';
 @import './varaibles';
 
+* {
+  font-family: 'Inter', sans-serif;
+}
 .container {
   width: 1300px;
   margin: 0 auto;

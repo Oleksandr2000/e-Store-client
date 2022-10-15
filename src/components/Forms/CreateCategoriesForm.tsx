@@ -4,15 +4,14 @@ import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
-import { useAppDispatch } from '../hooks';
-import { createBrand } from '../redux/slice/BrandSlice';
-import { createType } from '../redux/slice/TypeSlice';
+import { useAppDispatch } from '../../hooks';
 
 interface DeviceFormpRrops {
   name: string;
+  onClick: (body: any) => any;
 }
 
-const CreateCategoriesForm: React.FC<DeviceFormpRrops> = ({ name }) => {
+const CreateCategoriesForm: React.FC<DeviceFormpRrops> = ({ name, onClick }) => {
   const dispatch = useAppDispatch();
 
   const CreateCategories = useFormik({
@@ -26,21 +25,15 @@ const CreateCategoriesForm: React.FC<DeviceFormpRrops> = ({ name }) => {
     }),
 
     onSubmit: (values) => {
-      if (name.toLowerCase() === 'brand') {
-        dispatch(createBrand(values));
-        CreateCategories.resetForm();
-      }
-      if (name.toLowerCase() === 'type') {
-        dispatch(createType(values));
-        CreateCategories.resetForm();
-      }
+      dispatch(onClick(values));
+      CreateCategories.resetForm();
     },
   });
 
   return (
     <>
       <Card style={{ width: 600 }} className="mt-5">
-        <h2 className="m-auto mt-2">Create {name}</h2>
+        <h2 className="d-flex justify-content-center mt-2">Create {name}</h2>
         <Form className="m-4" onSubmit={CreateCategories.handleSubmit}>
           <Form.Group className="mb-3" />
           <Form.Label htmlFor="name">{name}</Form.Label>

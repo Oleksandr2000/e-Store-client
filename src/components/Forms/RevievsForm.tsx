@@ -4,9 +4,9 @@ import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
-import { useAppDispatch, useAppSelector } from '../hooks';
-import { postReviews } from '../redux/slice/UserSlice';
-import { fetchOneDevice } from '../redux/slice/DeviceSlice';
+import { useAppDispatch, useAppSelector } from '../../hooks';
+import { postReviews } from '../../redux/slice/UserSlice';
+import { fetchOneDevice } from '../../redux/slice/DeviceSlice';
 import { useParams } from 'react-router';
 
 const RevievsForm = () => {

@@ -1,12 +1,12 @@
 import React from 'react';
 import { useParams } from 'react-router';
 import Loader from '../components/Loader';
-import AdditionalDeviceBar from '../components/AdditionalDeviceBar';
+import AdditionalDeviceBar from '../components/DevicePage/AdditionalDeviceBar';
 import { useAppDispatch, useAppSelector } from '../hooks';
 import { fetchOneDevice, fetchAllSale } from '../redux/slice/DeviceSlice';
 import { addProduct, fetchAdd } from '../redux/slice/BasketSlice';
 import { BasketDevice } from '../types';
-import ModalLoader from '../components/ModalLoader';
+import ModalLoader from '../components/Modal/ModalLoader';
 import { Container } from 'react-bootstrap';
 
 const DevicePage: React.FC = () => {
@@ -62,7 +62,7 @@ const DevicePage: React.FC = () => {
     <Container>
       <div className="device">
         <div className="device__image">
-          <img src={`http://localhost:4444/${device.img}`} alt="logo" />
+          <img src={`http://localhost:5000/${device.img}`} alt="logo" />
         </div>
         <div className="device__info">
           <div className="device__header">

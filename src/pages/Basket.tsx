@@ -1,14 +1,14 @@
 import React from 'react';
 import { useAppDispatch, useAppSelector } from '../hooks';
 import { clearBasket, fetchConfirm } from '../redux/slice/BasketSlice';
-import BasketItem from '../components/BasketItem';
+import BasketItem from '../components/BasketPage/BasketItem';
 import Loader from '../components/Loader';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import Modal from 'react-bootstrap/Modal';
 import NoDevice from '../components/NoDevice';
 import { calcTotalCount, calcTotalPrice } from '../services';
-import ModalLoader from '../components/ModalLoader';
+import ModalLoader from '../components/Modal/ModalLoader';
 import { Container } from 'react-bootstrap';
 
 const Basket = () => {

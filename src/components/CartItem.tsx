@@ -33,7 +33,7 @@ const CartItem: React.FC<CartItemProps> = ({
 
   return (
     <Card style={{ width: '18rem' }} className="mb-4 m-auto device__card position-relative">
-      <Card.Img variant="top" src={`http://localhost:4444/${img}`} height={300} className="mt-5" />
+      <Card.Img variant="top" src={`http://localhost:5000/${img}`} height={300} className="mt-5" />
       <Card.Body>
         <Card.Title style={{ height: '50px' }}>{name}</Card.Title>
         {sale ? (

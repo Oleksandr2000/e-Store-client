@@ -2,8 +2,13 @@ import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import axios from '../../axios';
 import { Device } from '../../types';
 
-export const createDevice = createAsyncThunk<void, any>('device/createDevice', async (params) => {
+export const createDevice = createAsyncThunk<any, any>('device/createDevice', async (params) => {
   const { data } = await axios.post('/device', params);
+  return data;
+});
+
+export const updateDevice = createAsyncThunk<any, any>('device/updateDevice', async (params) => {
+  const { data } = await axios.patch('/device', params);
   return data;
 });
 
@@ -61,6 +66,11 @@ export const fetchAllHit = createAsyncThunk<Device[]>('device/fetchAllHit', asyn
   return data;
 });
 
+export const fetchReviews = createAsyncThunk<any>('device/fetchReviews', async () => {
+  const { data } = await axios.get('/reviews');
+  return data;
+});
+
 export type DeviceRes = {
   count: number;
   rows: Device[];
@@ -72,6 +82,7 @@ interface DeviceState {
   sale: Device[];
   searchItems: Device[];
   device: Device;
+  reviews: any;
   status: string | null;
   searchLoading: string | null;
   statusPOST: string | null;
@@ -101,6 +112,7 @@ const initialState: DeviceState = {
     img: '',
     info: [],
   },
+  reviews: [],
   status: null,
   statusPOST: null,
   searchLoading: null,
@@ -132,6 +144,15 @@ const deviceSlice = createSlice({
         state.statusPOST = 'loaded';
       })
       .addCase(createDevice.rejected, (state) => {
+        state.statusPOST = 'error';
+      })
+      .addCase(updateDevice.pending, (state) => {
+        state.statusPOST = 'loading';
+      })
+      .addCase(updateDevice.fulfilled, (state) => {
+        state.statusPOST = 'loaded';
+      })
+      .addCase(updateDevice.rejected, (state) => {
         state.statusPOST = 'error';
       })
       .addCase(fetchAllDevice.pending, (state) => {
@@ -182,6 +203,16 @@ const deviceSlice = createSlice({
         state.sale = action.payload;
       })
       .addCase(fetchAllSale.rejected, (state) => {
+        state.status = 'error';
+      })
+      .addCase(fetchReviews.pending, (state) => {
+        state.status = 'loading';
+      })
+      .addCase(fetchReviews.fulfilled, (state, action) => {
+        state.status = 'loaded';
+        state.reviews = action.payload;
+      })
+      .addCase(fetchReviews.rejected, (state) => {
         state.status = 'error';
       });
   },

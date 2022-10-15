@@ -14,10 +14,30 @@ export const createBrand = createAsyncThunk<void, { name: string }>(
   },
 );
 
+export const updateBrand = createAsyncThunk<void, { name: string; id: number }>(
+  'brand/updateBrand',
+  async (params, { rejectWithValue }) => {
+    try {
+      const { data } = await axios.patch('/brand', params);
+      return data;
+    } catch (error: any) {
+      return rejectWithValue(error.message);
+    }
+  },
+);
+
 export const fetchBrands = createAsyncThunk<Brand[]>('brand/fetchBrands', async () => {
   const { data } = await axios.get('/brand');
   return data;
 });
+
+export const destroyBrand = createAsyncThunk<void, { id: number }>(
+  'brand/destroyBrand',
+  async (params) => {
+    const { id } = params;
+    await axios.delete(`/brand/${id}`);
+  },
+);
 
 interface BrandState {
   brands: Brand[];
@@ -62,6 +82,15 @@ const brandSlice = createSlice({
       .addCase(createBrand.rejected, (state) => {
         state.statusPOST = 'error';
       })
+      .addCase(updateBrand.pending, (state) => {
+        state.statusPOST = 'loading';
+      })
+      .addCase(updateBrand.fulfilled, (state) => {
+        state.statusPOST = 'loaded';
+      })
+      .addCase(updateBrand.rejected, (state) => {
+        state.statusPOST = 'error';
+      })
       .addCase(fetchBrands.pending, (state) => {
         state.status = 'loading';
       })
@@ -71,6 +100,15 @@ const brandSlice = createSlice({
       })
       .addCase(fetchBrands.rejected, (state) => {
         state.status = 'error';
+      })
+      .addCase(destroyBrand.pending, (state) => {
+        state.statusPOST = 'loading';
+      })
+      .addCase(destroyBrand.fulfilled, (state) => {
+        state.statusPOST = 'loaded';
+      })
+      .addCase(destroyBrand.rejected, (state) => {
+        state.statusPOST = 'error';
       });
   },
 });
