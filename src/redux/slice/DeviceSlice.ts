@@ -3,12 +3,12 @@ import axios from '../../axios';
 import { Device } from '../../types';
 
 export const createDevice = createAsyncThunk<any, any>('device/createDevice', async (params) => {
-  const { data } = await axios.post('/device', params);
+  const { data } = await axios.post('/product', params);
   return data;
 });
 
 export const updateDevice = createAsyncThunk<any, any>('device/updateDevice', async (params) => {
-  const { data } = await axios.patch('/device', params);
+  const { data } = await axios.patch('/product', params);
   return data;
 });
 
@@ -24,7 +24,7 @@ export const fetchAllDevice = createAsyncThunk<
   const { filterBrand, filterType, limit, page } = params;
 
   const { data } = await axios.get(
-    `/device/?brandId=${filterBrand}&typeId=${filterType}&limit=${limit}&page=${page}`,
+    `/product/?brandId=${filterBrand}&typeId=${filterType}&limit=${limit}&page=${page}`,
   );
 
   return data;
@@ -41,7 +41,7 @@ export const fetchSearchDevice = createAsyncThunk<
   const { filterBrand, filterType, str } = params;
 
   const { data } = await axios.get(
-    `/device/?brandId=${filterBrand}&typeId=${filterType}&str=${str}`,
+    `/product/?brandId=${filterBrand}&typeId=${filterType}&str=${str}`,
   );
 
   return data;
@@ -51,7 +51,7 @@ export const fetchOneDevice = createAsyncThunk<Device, { id: number }>(
   'device/fetchOneDevice',
   async (params) => {
     const { id } = params;
-    const { data } = await axios.get(`/device/${id}`);
+    const { data } = await axios.get(`/product/${id}`);
     return data;
   },
 );

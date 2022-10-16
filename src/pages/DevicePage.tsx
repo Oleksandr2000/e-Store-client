@@ -62,7 +62,7 @@ const DevicePage: React.FC = () => {
     <Container>
       <div className="device">
         <div className="device__image">
-          <img src={`http://localhost:5000/${device.img}`} alt="logo" />
+          <img src={`https://pet-e-store.herokuapp.com/${device.img}`} alt="logo" />
         </div>
         <div className="device__info">
           <div className="device__header">

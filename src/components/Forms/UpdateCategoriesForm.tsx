@@ -53,7 +53,7 @@ const UpdateCategoriesForm: React.FC<FormProps> = ({ name, onClick, items, onCli
 
   return (
     <>
-      <Card style={{ width: 600 }} className="mt-5">
+      <Card style={{ width: 500 }} className="mt-5">
         <h2 className="d-flex justify-content-center mt-2">Select {name}</h2>
         <Form.Group className="mx-4 mt-3">
           <Form.Label>Select {name}</Form.Label>

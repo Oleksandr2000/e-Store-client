@@ -32,7 +32,7 @@ const CreateCategoriesForm: React.FC<DeviceFormpRrops> = ({ name, onClick }) => 
 
   return (
     <>
-      <Card style={{ width: 600 }} className="mt-5">
+      <Card style={{ width: 500 }} className="mt-5">
         <h2 className="d-flex justify-content-center mt-2">Create {name}</h2>
         <Form className="m-4" onSubmit={CreateCategories.handleSubmit}>
           <Form.Group className="mb-3" />

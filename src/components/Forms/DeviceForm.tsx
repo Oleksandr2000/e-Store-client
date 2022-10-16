@@ -95,7 +95,7 @@ const DeviceForm: React.FC<DeviceFormpRrops> = ({ name, update, onClick, childre
   };
 
   return (
-    <Card style={{ width: 600 }} className="mt-5">
+    <Card style={{ width: 500 }} className="mt-5">
       <h2 className="mt-2 d-flex justify-content-center">{name}</h2>
       {children && children}
       <Form className="m-4" onSubmit={createForm.handleSubmit}>

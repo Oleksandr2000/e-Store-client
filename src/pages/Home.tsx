@@ -49,14 +49,14 @@ const Home = () => {
     <div className="main-page">
       <Description />
 
-      {/* <Slider items={sale} loading={isLoadingItems} className="home-page__title" title="Sale" /> */}
+      <Slider items={sale} loading={isLoadingItems} className="home-page__title" title="Sale" />
 
-      {/* <Slider
+      <Slider
         items={hits}
         loading={isLoadingItems}
         className="home-page__title"
         title="Most Popular Goods"
-      /> */}
+      />
 
       <Feedback />
       <Advantages />
