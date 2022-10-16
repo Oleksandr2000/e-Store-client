@@ -6,8 +6,8 @@ import ContactsForm from '../Forms/ContactsForm';
 
 const Feedback = () => {
   return (
-    <Container>
-      <div className="feedback">
+    <div className="feedback">
+      <Container>
         <motion.section initial="hidden" whileInView="visible" viewport={{ amount: 0.2 }}>
           <motion.h2 custom={1} variants={LeftAnimation} className="home-page__title">
             Leave Contacts
@@ -19,8 +19,8 @@ const Feedback = () => {
             </div>
           </div>
         </motion.section>
-      </div>
-    </Container>
+      </Container>
+    </div>
   );
 };
 

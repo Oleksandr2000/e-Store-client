@@ -3,8 +3,8 @@ import { Container } from 'react-bootstrap';
 
 const Advantages = () => {
   return (
-    <Container>
-      <div className="advantages">
+    <div className="advantages">
+      <Container>
         <div className="advantages__wrapper">
           <div className="advantages__item">
             <img className="advantages__item_icon" src="advantages.png" alt="icon" />
@@ -27,8 +27,8 @@ const Advantages = () => {
             <div className="advantages__item_name">We pay this tax every month</div>
           </div>
         </div>
-      </div>
-    </Container>
+      </Container>
+    </div>
   );
 };
 

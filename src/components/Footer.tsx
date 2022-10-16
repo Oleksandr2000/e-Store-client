@@ -3,8 +3,8 @@ import { Container } from 'react-bootstrap';
 
 const Footer = () => {
   return (
-    <Container>
-      <div className="footer">
+    <div className="footer">
+      <Container>
         <div className="footer__wrapper">
           <div className="footer__contacts">
             <img src="/logo-eStore.svg" alt="eStore" className="logo" />
@@ -105,8 +105,8 @@ const Footer = () => {
             </svg>
           </div>
         </div>
-      </div>
-    </Container>
+      </Container>
+    </div>
   );
 };
 
