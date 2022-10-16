@@ -1,6 +1,10 @@
+.modal-content {
+  background: rgba(250, 250, 250);
+}
 .search {
   &-panel {
     width: 500px;
+    margin: 0 auto;
   }
   &__input {
     position: relative;
@@ -14,6 +18,18 @@
   }
 }
 
-.modal-content {
-  background: rgba(250, 250, 250);
+@media (max-device-width: 768px) {
+  .search {
+    &-panel {
+      width: 400px;
+    }
+  }
+}
+
+@media (max-device-width: 576px) {
+  .search {
+    &-panel {
+      width: 300px;
+    }
+  }
 }

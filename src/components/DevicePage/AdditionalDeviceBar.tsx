@@ -6,6 +6,7 @@ import Revievs from '../Revievs';
 const AdditionalDeviceBar = () => {
   const { sale } = useAppSelector((store) => store.device);
   const [activeTab, setActiveTab] = React.useState<number>(0);
+  const isLoadingItems = useAppSelector((store) => store.device.status) === 'loading';
 
   return (
     <div className="additional-bar">
@@ -34,7 +35,7 @@ const AdditionalDeviceBar = () => {
           <Revievs />
         </div>
         <div className="additional-bar__tab" hidden={activeTab !== 1}>
-          <Slider items={sale} title={''} />
+          <Slider items={sale} loading={isLoadingItems} title={''} />
         </div>
       </div>
     </div>

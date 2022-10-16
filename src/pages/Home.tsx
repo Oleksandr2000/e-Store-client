@@ -12,7 +12,6 @@ import SearchPanel from '../components/SearchPanel';
 import { Button, Container } from 'react-bootstrap';
 import Description from '../components/HomePage/Description';
 import Advantages from '../components/HomePage/Advantages';
-import Skeleton from '../components/Skeleton';
 import Feedback from '../components/HomePage/Feedback';
 import ReviewItem from '../components/ReviewItem';
 import { motion } from 'framer-motion';
@@ -38,7 +37,7 @@ const Home = () => {
     'Meizu',
     'Sony',
   ];
-  const { sale, hits, status } = useAppSelector((store) => store.device);
+  const { sale, hits } = useAppSelector((store) => store.device);
   const isLoadingItems = useAppSelector((store) => store.device.status) === 'loading';
 
   React.useEffect(() => {
@@ -50,43 +49,37 @@ const Home = () => {
     <div className="main-page">
       <Description />
 
-      <Container>
-        {isLoadingItems || !status ? (
-          [...Array(4)].map((item) => (
-            <div className="m-auto">
-              <Skeleton />
-            </div>
-          ))
-        ) : (
-          <Slider items={sale} title="Sale" />
-        )}
-        {isLoadingItems || !status ? (
-          [...Array(4)].map((item) => (
-            <div className="m-auto">
-              <Skeleton />
-            </div>
-          ))
-        ) : (
-          <Slider items={hits} title="Most Popular Goods" />
-        )}
-      </Container>
+      {/* <Slider items={sale} loading={isLoadingItems} className="home-page__title" title="Sale" /> */}
+
+      {/* <Slider
+        items={hits}
+        loading={isLoadingItems}
+        className="home-page__title"
+        title="Most Popular Goods"
+      /> */}
+
       <Feedback />
       <Advantages />
-      <Container>
-        <Grid />
+      <Grid />
+      <div className="container">
         <motion.section
           className="reviews-block"
           initial="hidden"
           whileInView="visible"
           viewport={{ amount: 0.4, once: true }}>
-          <h2 className="reviews-block__title">Reviews our customers</h2>
+          <h2 className="home-page__title">Reviews our customers</h2>
           {reviews.map((item: any, i: number) => (
-            <motion.div custom={i + 1} variants={LeftAnimation} className="reviews-block__item">
-              <ReviewItem {...item} key={item.id} />
+            <motion.div
+              key={item.id}
+              custom={i + 1}
+              variants={LeftAnimation}
+              className="reviews-block__item">
+              <ReviewItem {...item} />
             </motion.div>
           ))}
         </motion.section>
         <div className="search">
+          <h2 className="home-page__title">Search Device</h2>
           <div className="search__control">
             <SearchPanel />
           </div>
@@ -104,7 +97,7 @@ const Home = () => {
             ))}
           </div>
         </div>
-      </Container>
+      </div>
     </div>
   );
 };

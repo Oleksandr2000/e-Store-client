@@ -1,5 +1,16 @@
 @import '../varaibles';
 
+.main-page {
+  width: 100%;
+}
+
+.home-page__title {
+  font-size: 36px;
+  font-weight: 600;
+  text-align: center;
+  padding: 20px 0;
+}
+
 .grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -27,11 +38,6 @@
 
 .slider-hit {
   margin: 50px 0;
-
-  h2 {
-    margin-bottom: 20px;
-    text-align: center;
-  }
   &__wrapper {
     position: relative;
     display: grid;
@@ -132,10 +138,6 @@
 .feedback {
   padding: 35px 0;
   background-color: #215b77;
-  &__title {
-    font-size: 32px;
-    font-weight: 600;
-  }
   &__wrapper {
     display: flex;
     justify-content: space-between;
@@ -158,12 +160,174 @@
 .reviews-block {
   margin: 80px 0;
   text-align: center;
-  &__title {
-    font-size: 36px;
-    font-weight: 600;
-  }
   &__item {
     margin: 50px auto;
     width: 60%;
+  }
+}
+
+@media (max-width: 1200px) {
+  .advantages {
+    &__item {
+      width: 200px;
+      height: 200px;
+      &_count {
+        font-size: 24px;
+      }
+      &_name {
+        font-size: 16px;
+      }
+    }
+  }
+}
+
+@media (max-device-width: 992px) {
+  .home-page__title {
+    font-size: 30px;
+    padding: 20px 0;
+  }
+  .description {
+    &__wrapper {
+      display: flex;
+      justify-content: space-between;
+      padding: 70px 0;
+    }
+    &__title {
+      font-size: 46px;
+    }
+    &__subtitle {
+      width: 90%;
+      margin: 26px 0;
+      font-size: 16px;
+    }
+  }
+  .feedback {
+    padding: 10px 0;
+  }
+  .advantages {
+    &__item {
+      width: 160px;
+      height: 160px;
+      &_icon {
+        height: 42px;
+        width: 42px;
+      }
+      &_count {
+        font-size: 20px;
+        margin: 5px;
+      }
+      &_name {
+        font-size: 14px;
+        font-weight: 600;
+      }
+    }
+  }
+  .reviews-block {
+    margin-top: 30px;
+  }
+  .search {
+    margin-top: 10px;
+  }
+}
+
+@media (max-device-width: 768px) {
+  .container {
+    width: 520px !important;
+    margin: 0 auto !important;
+  }
+  .description {
+    &__wrapper {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 40px 0;
+    }
+    &__info {
+      width: 100%;
+    }
+    &__title {
+      font-size: 46px;
+      text-align: center;
+    }
+    &__subtitle {
+      width: 100%;
+      margin: 26px 0;
+      font-size: 16px;
+    }
+    &__media {
+      display: none;
+    }
+  }
+  .feedback {
+    padding: 10px 0;
+    &__wrapper {
+      display: block;
+    }
+    &__form {
+      width: 100%;
+    }
+    &__media {
+      display: none;
+    }
+  }
+  .advantages {
+    &__wrapper {
+      grid-template-columns: repeat(2, 1fr);
+      grid-template-rows: repeat(2, 1fr);
+      row-gap: 20px;
+    }
+  }
+  .reviews-block {
+    width: 100% !important;
+    margin-top: 30px;
+  }
+  .search {
+    width: 100% !important;
+    margin-top: 10px;
+  }
+}
+
+@media (max-device-width: 576px) {
+  .container {
+    width: 320px !important;
+    margin: 0 auto !important;
+  }
+  .advantages {
+    &__wrapper {
+      grid-template-columns: repeat(2, 1fr);
+      grid-template-rows: repeat(2, 1fr);
+      row-gap: 30px;
+      column-gap: 30px;
+    }
+    &__item {
+      width: 130px;
+      height: 130px;
+      &_icon {
+        height: 32px;
+        width: 32px;
+      }
+      &_count {
+        font-size: 16px;
+        margin: 5px;
+      }
+      &_name {
+        font-size: 12px;
+        font-weight: 600;
+      }
+    }
+  }
+  .grid {
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+    row-gap: 20px;
+  }
+  .reviews-block {
+    &__item {
+      width: 90%;
+      margin: 0 auto;
+    }
+  }
+  .search {
+    display: none;
   }
 }

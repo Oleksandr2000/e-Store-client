@@ -31,9 +31,9 @@ const Header = () => {
   };
 
   return (
-    <>
+    <Container>
       <div className="header">
-        <Container className="header__wrapper">
+        <div className="header__wrapper">
           <Link to={HOME_ROUTE}>
             <div className="header__logo">
               <img src="/logo-eStore.svg" alt="eStore" className="logo" />
@@ -83,12 +83,12 @@ const Header = () => {
               </Link>
             </div>
           )}
-        </Container>
+        </div>
       </div>
       <div className="subheader">
         <SearchPanel />
       </div>
-    </>
+    </Container>
   );
 };
 

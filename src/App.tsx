@@ -10,6 +10,7 @@ import { fetchType } from './redux/slice/TypeSlice';
 import { fetchAuth } from './redux/slice/UserSlice';
 import Footer from './components/Footer';
 import { fetchBasket } from './redux/slice/BasketSlice';
+import { Container } from 'react-bootstrap';
 
 function App() {
   const isAuth = true;

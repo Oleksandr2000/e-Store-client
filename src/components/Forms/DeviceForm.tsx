@@ -65,7 +65,7 @@ const DeviceForm: React.FC<DeviceFormpRrops> = ({ name, update, onClick, childre
       }
       formData.append('name', values.name);
       formData.append('price', values.price);
-      // formData.append('img', values.img);
+      formData.append('img', values.img);
       formData.append('brandId', values.brand);
       formData.append('typeId', values.type);
       formData.append('hit', JSON.stringify(values.hit));

@@ -27,8 +27,8 @@ const pathAnimation = {
 
 const Description = () => {
   return (
-    <div className="description">
-      <Container>
+    <Container>
+      <div className="description">
         <div className="description__wrapper">
           <motion.section initial="hidden" whileInView="visible" className="description__info">
             <motion.h1 custom={1} variants={descrRightAnimation} className="description__title">
@@ -51,8 +51,8 @@ const Description = () => {
             </div>
           </div>
         </div>
-      </Container>
-    </div>
+      </div>
+    </Container>
   );
 };
 
